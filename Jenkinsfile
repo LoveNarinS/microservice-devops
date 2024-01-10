@@ -4,9 +4,15 @@ pipeline {
         APP_NAME = "test app name"
     }
     stages{
-        stage('Build Image'){
+        stage('Build Image') {
             steps {
                 sh "echo ${env.APP_NAME}"
+            }
+        }
+         stage('Build Stage (Docker)') {
+            agent {label 'build-server'}
+            steps {
+                sh "docker build -t ghcr.io/lovenarins/microservice-devops ."
             }
         }
     }
