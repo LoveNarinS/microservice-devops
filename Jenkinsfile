@@ -9,11 +9,27 @@ pipeline {
                 sh "echo ${env.APP_NAME}"
             }
         }
-         stage('Build Stage (Docker)') {
+        stage('Build Stage (Docker)') {
             agent {label 'build-server'}
             steps {
                 sh "docker build -t ghcr.io/lovenarins/microservice-devops ."
             }
         }
+        stage('Deliver Docker Image') {
+            agent {label 'build-server'}
+            steps {
+                withCredentials(
+                [usernamePassword(
+                    credentialsId: 'lovenarin',
+                    passwordVariable: 'githubPassword',
+                    usernameVariable: 'githubUser'
+                )]
+            ){
+                sh "docker login ghcr.io -u ${env.githubUser} -p ${env.githubPassword}"
+                sh "docker push ghcr.io/lovenarins/microservice-devops"
+            }
+            }
+        }
+        
     }
 }
