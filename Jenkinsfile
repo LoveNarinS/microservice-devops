@@ -3,6 +3,7 @@ pipeline {
     environment {
         APP_NAME = "test app name"
         IMAGE_NAME = "ghcr.io/lovenarins/microservice-devops"
+        AAA = "aaa"
     }
     stages{
         stage('Build Image') {
