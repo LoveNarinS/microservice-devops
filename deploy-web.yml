@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: microservice-devops
+  name: user10
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: microservice-devops
+      app: user10
   template:
     metadata:
       labels:
-        app: microservice-devops
+        app: user10
     spec:
       containers:
-        - name: microservice-devops-server
+        - name: user10-server
           image: ghcr.io/lovenarins/microservice-devops
           ports:
             - containerPort: 80
@@ -21,12 +21,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: microservice-devops-service
+  name: user10-service
   labels:
-    app: microservice-devops-service
+    app: user10-service
 spec:
   selector:
-    app: microservice-devops
+    app: user10
   ports:
     - name: web-port
       protocol: TCP
