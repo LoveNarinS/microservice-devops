@@ -15,6 +15,7 @@ spec:
       containers:
         - name: user10-server
           image: ghcr.io/lovenarins/microservice-devops
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---
